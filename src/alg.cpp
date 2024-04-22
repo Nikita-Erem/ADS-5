@@ -3,9 +3,9 @@
 #include <map>
 #include "tstack.h"
 
-int Priority(char op) {
-    if (op == '+' || op == '-') return 1;
-    if (op == '*' || op == '/') return 2;
+int Priority(char operand) {
+    if (operand == '+' || operand == '-') return 1;
+    if (operand == '*' || operand == '/') return 2;
     return 0;
 }
 
@@ -44,9 +44,7 @@ std::string infx2pstfx(std::string inf) {
     }
     return postfix;
 }
-
-int eval(std::string pref) {
- int eval(std::string post) {
+int eval(std::string post) {
     TStack<int, 100> stack;
     std::string Number;
     for (char c : post) {
@@ -57,28 +55,20 @@ int eval(std::string pref) {
             Number = "";
         }
         if (isOperator(c)) {
-            int op2 = stack.get();
+            int a = stack.get();
             stack.pop();
-            int op1 = stack.get();
+            int b = stack.get();
             stack.pop();
-            switch (c) {
-            case '+':
-                stack.push(op1 + op2);
-                break;
-            case '-':
-                stack.push(op1 - op2);
-                break;
-            case '*':
-                stack.push(op1 * op2);
-                break;
-            case '/':
-                stack.push(op1 / op2);
-                break;
-            }
-        }
+            if (c == '+') {  
+                  stack2.add((a + b));
+                } else if (c == '-') {
+                 stack2.add((a - b));
+                 } else if (c == '*') {
+                 stack2.add((a * b));
+                } else if (c == '/') {
+                 stack2.add((a / b));
+      }
     }
-    if (Number != "") {
-        stack.push(std::atoi(Number.c_str()));
-    }
+  }
     return stack.get();
 }
