@@ -76,5 +76,3 @@ int eval(std::string pref) {
 
   return stack2.show();
 }
-    return stack.get();
-}
