@@ -6,43 +6,33 @@
 template<typename T, int size>
 class TStack {
  private:
-  T data[300];
-  int top;
+    T data[100];
+    int top;
 
  public:
-  TStack() : top(0) {}
-
-  void push(const T &item) {
-    if (top <= size - 1) {
-      data[top++] = item;
-    } else {
-      throw std::string("Stack overflow");
+    TStack() : top(-1) {}
+    void push(T value) {
+        if (!isFull())
+            data[++top] = value;
+        else
+            throw std::string("Full");
     }
-  }
-
-  T pop() {
-    if (top > 0) {
-      return data[--top];
-    } else {
-      throw std::string("Stack is empty");
+    T get() const {
+        return data[top];
     }
-  }
-
-  T get() const {
-    if (top > 0) {
-      return data[top - 1];
-    } else {
-      throw std::string("Empty");
+    T pop() {
+        if (isEmpty()) {
+            throw std::string("Empty");
+        } else {
+            return data[top--];
+        }
     }
-  }
-
-  bool isEmpty() const {
-        return top == 0;
-  }
-  bool isFull() const {
+    bool isEmpty() const {
+        return top == -1;
+    }
+    bool isFull() const {
         return top == size - 1;
     }
-
 };
 
 #endif  // INCLUDE_TSTACK_H_
